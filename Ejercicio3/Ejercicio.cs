@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Threading;
+
 
 namespace Ejercicio3
 {
@@ -13,7 +16,7 @@ namespace Ejercicio3
         // Además se mostrará en pantalla la variable a cada vez que cambie indicando quién la ha cambiado(thread 1 o thread 2).
         // Ambos hilos deben parar en cuanto uno consiga su objetivo.
 
-        //b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
+        // b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
 
 
 
