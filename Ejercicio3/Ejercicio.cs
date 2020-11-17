@@ -18,14 +18,34 @@ namespace Ejercicio3
 
         // b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
 
+        static int num = 0; // Creo y declaro la variable que los hilos modificarán
 
-
-
-
-        static void Main(string[] args)
+        static void incremento()
         {
-            int num = 0; // Creo y declaro la variable que los hilos modificarán
+            while (num != 1000)
+            {
+                num++;
+                Console.WriteLine(num + " : Hilo Suma");
+            }
+        }
+        static void decremento()
+        {
+            while (num != -1000)
+            {
+                num--;
+                Console.WriteLine(num + " : Hilo Resta");
+            }
+        }
 
+        public static void Main(string[] args)
+        {
+                Thread hiloSuma = new Thread(incremento);
+                hiloSuma.Start();
+
+                Thread hiloResta = new Thread(decremento);
+                hiloResta.Start();
+
+                Console.ReadLine();
         }
     }
 }
