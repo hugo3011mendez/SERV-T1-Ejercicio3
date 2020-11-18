@@ -19,10 +19,9 @@ namespace Ejercicio3
         // b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
 
         static int num = 0; // Creo y declaro la variable que los hilos modificarán
-        static Thread hiloSuma = new Thread(incremento);
-        static Thread hiloResta = new Thread(decremento);
 
-        static void incremento()
+        // Creo y declaro el primer hilo, con una expresión lambda como función que indica lo que debe hacer
+        static Thread hiloSuma = new Thread(() =>
         {
             if (!hiloResta.IsAlive)
             {
@@ -36,8 +35,13 @@ namespace Ejercicio3
                     Console.WriteLine(num + " : Hilo Suma");
                 }
             }
+
         }
-        static void decremento()
+        );
+
+
+        // Creo y declaro el segundo hilo, con una expresión lambda como función que indica lo que debe hacer
+        static Thread hiloResta = new Thread(() =>
         {
             if (!hiloSuma.IsAlive)
             {
@@ -51,7 +55,10 @@ namespace Ejercicio3
                     Console.WriteLine(num + " : Hilo Resta");
                 }
             }
+
         }
+        );
+
 
         public static void Main(string[] args)
         {
@@ -59,23 +66,16 @@ namespace Ejercicio3
 
             hiloResta.Start();
 
-            //if (num == 1000)
-            //{
-            //    hiloSuma.Abort();
-            //}
-            //else if (num == -1000)
-            //{
-            //    hiloResta.Abort();
-            //}
+            Console.WriteLine();
 
-            //if (!hiloSuma.IsAlive)
-            //{
-            //    hiloResta.Abort();
-            //}
-            //else if (hiloResta.IsAlive)
-            //{
-            //    hiloSuma.Abort();
-            //}
+            if (num == 1000)
+            {
+                Console.WriteLine("Gana el primer hilo!");
+            }
+            else if (num == -1000)
+            {
+                Console.WriteLine("Gana el segundo hilo!");
+            }
 
             Console.ReadLine();
         }
