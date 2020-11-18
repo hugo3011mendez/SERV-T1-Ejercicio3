@@ -19,33 +19,65 @@ namespace Ejercicio3
         // b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
 
         static int num = 0; // Creo y declaro la variable que los hilos modificarán
+        static Thread hiloSuma = new Thread(incremento);
+        static Thread hiloResta = new Thread(decremento);
 
         static void incremento()
         {
-            while (num != 1000)
+            if (!hiloResta.IsAlive)
             {
-                num++;
-                Console.WriteLine(num + " : Hilo Suma");
+                hiloSuma.Abort();
+            }
+            else
+            {
+                while (num != 1000)
+                {
+                    num++;
+                    Console.WriteLine(num + " : Hilo Suma");
+                }
             }
         }
         static void decremento()
         {
-            while (num != -1000)
+            if (!hiloSuma.IsAlive)
             {
-                num--;
-                Console.WriteLine(num + " : Hilo Resta");
+                hiloResta.Abort();
+            }
+            else
+            {
+                while (num != -1000)
+                {
+                    num--;
+                    Console.WriteLine(num + " : Hilo Resta");
+                }
             }
         }
 
         public static void Main(string[] args)
         {
-                Thread hiloSuma = new Thread(incremento);
-                hiloSuma.Start();
+            hiloSuma.Start();
 
-                Thread hiloResta = new Thread(decremento);
-                hiloResta.Start();
+            hiloResta.Start();
 
-                Console.ReadLine();
+            //if (num == 1000)
+            //{
+            //    hiloSuma.Abort();
+            //}
+            //else if (num == -1000)
+            //{
+            //    hiloResta.Abort();
+            //}
+
+            //if (!hiloSuma.IsAlive)
+            //{
+            //    hiloResta.Abort();
+            //}
+            //else if (hiloResta.IsAlive)
+            //{
+            //    hiloSuma.Abort();
+            //}
+
+            Console.ReadLine();
         }
     }
 }
