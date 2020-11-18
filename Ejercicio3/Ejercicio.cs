@@ -19,23 +19,29 @@ namespace Ejercicio3
         // b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
 
         static int num = 0; // Creo y declaro la variable que los hilos modificarán
+        static bool flag = false; // Creo y declaro el flag
+
+        static readonly object l = new object(); // Creo el objeto del lock, porque los dos hilos están usando recursos iguales (num y flag)
 
         // Creo y declaro el primer hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloSuma = new Thread(() =>
         {
-            if (!hiloResta.IsAlive)
+            lock (l)
             {
-                hiloSuma.Abort();
-            }
-            else
-            {
-                while (num != 1000)
+                if (!flag)
                 {
-                    num++;
-                    Console.WriteLine(num + " : Hilo Suma");
+                    while (num != 10)
+                    {
+                        num++;
+                        Console.WriteLine(num + " : Hilo Suma");
+                    }
+
+                    if (num == 10)
+                    {
+                        flag = true;
+                    }
                 }
             }
-
         }
         );
 
@@ -43,16 +49,20 @@ namespace Ejercicio3
         // Creo y declaro el segundo hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloResta = new Thread(() =>
         {
-            if (!hiloSuma.IsAlive)
+            lock (l)
             {
-                hiloResta.Abort();
-            }
-            else
-            {
-                while (num != -1000)
+                if (!flag)
                 {
-                    num--;
-                    Console.WriteLine(num + " : Hilo Resta");
+                    while (num != -10)
+                    {
+                        num--;
+                        Console.WriteLine(num + " : Hilo Resta");
+                    }
+
+                    if (num == -10)
+                    {
+                        flag = true;
+                    }
                 }
             }
 
@@ -66,13 +76,16 @@ namespace Ejercicio3
 
             hiloResta.Start();
 
+            // Uso el Join para que el hilo Main se encuentre a la espera de que uno de los otros dos hilos acaben, y como acaban a la vez no importa el hilo que se debe poner en el Join
+            hiloSuma.Join();
+
             Console.WriteLine();
 
-            if (num == 1000)
+            if (num == 10)
             {
                 Console.WriteLine("Gana el primer hilo!");
             }
-            else if (num == -1000)
+            else if (num == -10)
             {
                 Console.WriteLine("Gana el segundo hilo!");
             }
