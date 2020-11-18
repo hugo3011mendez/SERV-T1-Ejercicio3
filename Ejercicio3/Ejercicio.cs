@@ -11,13 +11,6 @@ namespace Ejercicio3
 {
     class Ejercicio
     {
-        // a) Crea dos hilos compitiendo que traten de incrementar (el primer hilo) o decrementar (el segundo hilo) en 1 unidad una variable que comienza en 0.
-        // Funcionarán de forma continua hasta que a llegue a 1000 (primer hilo) o a -1000 (segundo hilo).
-        // Además se mostrará en pantalla la variable a cada vez que cambie indicando quién la ha cambiado(thread 1 o thread 2).
-        // Ambos hilos deben parar en cuanto uno consiga su objetivo.
-
-        // b) Las funciones de hilos serán expresiones lambda (si quieres y los ves claro haz ya directamente este apartado).
-
         static int num = 0; // Creo y declaro la variable que los hilos modificarán
         static bool flag = false; // Creo y declaro el flag
 
@@ -26,9 +19,10 @@ namespace Ejercicio3
         // Creo y declaro el primer hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloSuma = new Thread(() =>
         {
-            lock (l)
+            lock (l) // Primero lo meto dentro del lock
             {
-                if (!flag)
+                // Y hago las comprobaciones y acciones pertinentes
+                if (!flag) 
                 {
                     while (num != 10)
                     {
@@ -49,8 +43,9 @@ namespace Ejercicio3
         // Creo y declaro el segundo hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloResta = new Thread(() =>
         {
-            lock (l)
+            lock (l) // Primero lo meto dentro del lock
             {
+                // Y hago las comprobaciones y acciones pertinentes
                 if (!flag)
                 {
                     while (num != -10)
