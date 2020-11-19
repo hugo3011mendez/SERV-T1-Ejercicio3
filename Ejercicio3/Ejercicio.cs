@@ -19,18 +19,18 @@ namespace Ejercicio3
         // Creo y declaro el primer hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloSuma = new Thread(() =>
         {
-            lock (l) // Primero lo meto dentro del lock
+            while (num != 100)
             {
-                // Y hago las comprobaciones y acciones pertinentes
-                if (!flag) 
+                lock (l) // Primero lo meto dentro del lock
                 {
-                    while (num != 500)
+                   // Y hago las comprobaciones y acciones pertinentes
+                    if (!flag) 
                     {
                         num++;
                         Console.WriteLine(num + " : Hilo Suma");
                     }
 
-                    if (num == 500)
+                    if (num == 100)
                     {
                         flag = true;
                     }
@@ -43,18 +43,18 @@ namespace Ejercicio3
         // Creo y declaro el segundo hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloResta = new Thread(() =>
         {
-            lock (l) // Primero lo meto dentro del lock
+            while (num != -100)
             {
-                // Y hago las comprobaciones y acciones pertinentes
-                if (!flag)
+                lock (l) // Primero lo meto dentro del lock
                 {
-                    while (num != -500)
+                    // Y hago las comprobaciones y acciones pertinentes
+                    if (!flag)
                     {
                         num--;
                         Console.WriteLine(num + " : Hilo Resta");
                     }
 
-                    if (num == -500)
+                    if (num == -100)
                     {
                         flag = true;
                     }
@@ -75,11 +75,11 @@ namespace Ejercicio3
 
             Console.WriteLine();
 
-            if (num == 500)
+            if (num == 100)
             {
                 Console.WriteLine("Gana el primer hilo!");
             }
-            else if (num == -500)
+            else if (num == -100)
             {
                 Console.WriteLine("Gana el segundo hilo!");
             }
