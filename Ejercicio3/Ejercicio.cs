@@ -24,13 +24,13 @@ namespace Ejercicio3
                 // Y hago las comprobaciones y acciones pertinentes
                 if (!flag) 
                 {
-                    while (num != 100)
+                    while (num != 500)
                     {
                         num++;
                         Console.WriteLine(num + " : Hilo Suma");
                     }
 
-                    if (num == 100)
+                    if (num == 500)
                     {
                         flag = true;
                     }
@@ -48,13 +48,13 @@ namespace Ejercicio3
                 // Y hago las comprobaciones y acciones pertinentes
                 if (!flag)
                 {
-                    while (num != -100)
+                    while (num != -500)
                     {
                         num--;
                         Console.WriteLine(num + " : Hilo Resta");
                     }
 
-                    if (num == -100)
+                    if (num == -500)
                     {
                         flag = true;
                     }
@@ -68,7 +68,6 @@ namespace Ejercicio3
         public static void Main(string[] args)
         {
             hiloSuma.Start();
-
             hiloResta.Start();
 
             // Uso el Join para que el hilo Main se encuentre a la espera de que uno de los otros dos hilos acaben, y como acaban a la vez no importa el hilo que se debe poner en el Join
@@ -76,11 +75,11 @@ namespace Ejercicio3
 
             Console.WriteLine();
 
-            if (num == 100)
+            if (num == 500)
             {
                 Console.WriteLine("Gana el primer hilo!");
             }
-            else if (num == -100)
+            else if (num == -500)
             {
                 Console.WriteLine("Gana el segundo hilo!");
             }
