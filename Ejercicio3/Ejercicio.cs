@@ -24,13 +24,13 @@ namespace Ejercicio3
                 // Y hago las comprobaciones y acciones pertinentes
                 if (!flag) 
                 {
-                    while (num != 10)
+                    while (num != 100)
                     {
                         num++;
                         Console.WriteLine(num + " : Hilo Suma");
                     }
 
-                    if (num == 10)
+                    if (num == 100)
                     {
                         flag = true;
                     }
@@ -48,13 +48,13 @@ namespace Ejercicio3
                 // Y hago las comprobaciones y acciones pertinentes
                 if (!flag)
                 {
-                    while (num != -10)
+                    while (num != -100)
                     {
                         num--;
                         Console.WriteLine(num + " : Hilo Resta");
                     }
 
-                    if (num == -10)
+                    if (num == -100)
                     {
                         flag = true;
                     }
@@ -76,11 +76,11 @@ namespace Ejercicio3
 
             Console.WriteLine();
 
-            if (num == 10)
+            if (num == 100)
             {
                 Console.WriteLine("Gana el primer hilo!");
             }
-            else if (num == -10)
+            else if (num == -100)
             {
                 Console.WriteLine("Gana el segundo hilo!");
             }
