@@ -19,7 +19,7 @@ namespace Ejercicio3
         // Creo y declaro el primer hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloSuma = new Thread(() =>
         {
-            while (num != 100)
+            while (!flag)
             {
                 lock (l) // Primero lo meto dentro del lock
                 {
@@ -43,7 +43,7 @@ namespace Ejercicio3
         // Creo y declaro el segundo hilo, con una expresión lambda como función que indica lo que debe hacer
         static Thread hiloResta = new Thread(() =>
         {
-            while (num != -100)
+            while (!flag)
             {
                 lock (l) // Primero lo meto dentro del lock
                 {
